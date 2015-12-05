@@ -1,2 +1,2 @@
 # solus-scripts
-A collection of scripts to use on the Solus operating system.
+A collection of scripts to use in the Solus operating system.
