@@ -22,7 +22,7 @@ gsettings set org.gnome.desktop.wm.preferences theme 'Arc-Darker'
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
 
 # gedit
-gsettings set org.gnome.gedit.preferences.editor scheme 'solarized dark'
+gsettings set org.gnome.gedit.preferences.editor scheme 'solarized-dark'
 gsettings set org.gnome.gedit.preferences.editor create-backup-copy false
 gsettings set org.gnome.gedit.preferences.editor tabs-size "uint32 8"
 gsettings set org.gnome.gedit.preferences.editor auto-indent false
