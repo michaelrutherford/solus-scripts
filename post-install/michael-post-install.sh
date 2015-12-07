@@ -17,7 +17,7 @@ sudo eopkg it google-chrome-*.eopkg && sudo rm  google-chrome-*.eopkg
 sudo eopkg it squashfs-tools syslinux libisoburn -y
 
 # Gsettings
-#Theme/icons
+# Theme
 gsettings set org.gnome.desktop.wm.preferences theme 'Arc-Darker'
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
 
