@@ -1,7 +1,7 @@
 #!/bin/bash
 
 currentDir=$(pwd)
-goVer="1.5.2"
+goVer="1.5.3"
 goTarball="go${goVer}.linux-amd64.tar.gz"
 
 if ! [ -f /home/$USER/Downloads/$goTarball ]; then # If the go file doesnt exist
