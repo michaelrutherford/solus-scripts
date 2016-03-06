@@ -1,8 +1,15 @@
 #!/bin/bash
 
 currentDir=$(pwd)
-goVer="1.5.3"
+goVer="1.6"
 goTarball="go${goVer}.linux-amd64.tar.gz"
+rcFile=".bashrc" # Default RC file to .bashrc
+
+### Setup ###
+
+if [ -f /home/$USER/.zshrc ]; then # If we are using zsh
+    rcFile=".zshrc"
+fi
 
 if ! [ -f /home/$USER/Downloads/$goTarball ]; then # If the go file doesnt exist
     echo "Downloading Go v${goVer} to $USER's Downloads directory"
@@ -10,6 +17,8 @@ if ! [ -f /home/$USER/Downloads/$goTarball ]; then # If the go file doesnt exist
 fi
 
 cd "$currentDir"
+
+sudo mkdir -p /usr/local # Make sure /usr/local exists in the first place
 
 echo "Removing any existing Go install (needs root)."
 sudo rm -rf /usr/local/go # Remove go from /usr/local/go
@@ -19,11 +28,12 @@ echo "Installing Go v${goVer}"
 sudo tar -C /usr/local -xzf /home/$USER/Downloads/$goTarball # Extract go
 sudo ln -s /usr/local/go/bin/{go,godoc,gofmt} /usr/bin/ # Do symlinks
 
-gorootExists=$(grep -Fc "GOROOT" /home/$USER/.bashrc) # Get the number of instances of GOROOT
+gorootExists=$(grep -Fc "GOROOT=" /home/$USER/$rcFile) # Get the number of instances of GOROOT
 
 if [ $gorootExists -eq 0 ]; then # If there are no instances
-    echo "No GOROOT detected in .bashrc, adding now."
-    echo -e "\nexport GOROOT=/usr/local/go" >> /home/$USER/.bashrc # Echo (enabled backslash interpretation) of GOROOT
+    echo "No GOROOT detected in ${rcFile}, adding now."
+    echo -e "\nexport GOROOT=/usr/local/go" >> /home/$USER/$rcFile # Echo (enabled backslash interpretation) of GOROOT
+    echo -e "\nexport PATH=$PATH:$GOPATH:$GOROOT/bin" >> /home/$USER/$rcFile
 
     echo "GOROOT added. go, godoc, and gofmt should work after:"
     echo "1) Restarting your terminal."
