@@ -17,9 +17,9 @@ else
 	cd /home/$USER/Downloads && wget -q $vscodeUrl -O $tarballName # Download
 
 	echo "Bootstrapping..."
+	sudo rm -rf $vscodeDirRoot # Ensure existing VSCode content is removed
 	sudo mkdir -p $vscodeDirRoot # Ensure VSCode dir is created
 	cd $vscodeDirRoot # Go to VSCode directory
-	sudo rm -rf * # Ensure existing VSCode content is removed
 
 	echo "Unpackaging..."
 	sudo unzip -qq /home/$USER/Downloads/$tarballName
