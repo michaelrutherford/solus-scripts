@@ -1,7 +1,7 @@
 #!/bin/bash
 
 currentDir=$(pwd)
-goVer="1.6"
+goVer="1.6.1"
 goTarball="go${goVer}.linux-amd64.tar.gz"
 rcFile=".bashrc" # Default RC file to .bashrc
 
