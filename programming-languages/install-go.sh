@@ -1,7 +1,7 @@
 #!/bin/bash
 
 currentDir=$(pwd)
-goVer="1.6.1"
+goVer="1.6.2"
 goTarball="go${goVer}.linux-amd64.tar.gz"
 rcFile=".bashrc" # Default RC file to .bashrc
 
@@ -18,15 +18,17 @@ fi
 
 cd "$currentDir"
 
-sudo mkdir -p /usr/local # Make sure /usr/local exists in the first place
+echo "===== Needs root. ====="
 
-echo "Removing any existing Go install (needs root)."
+sudo mkdir -vp /usr/local # Make sure /usr/local exists in the first place
+
+echo "Removing any existing Go install."
 sudo rm -rf /usr/local/go # Remove go from /usr/local/go
-sudo rm -f /usr/bin/go /usr/bin/godoc /usr/bin/gofmt # Remove symlinks
+sudo rm -fv /usr/bin/go /usr/bin/godoc /usr/bin/gofmt # Remove symlinks
 
 echo "Installing Go v${goVer}"
 sudo tar -C /usr/local -xzf /home/$USER/Downloads/$goTarball # Extract go
-sudo ln -s /usr/local/go/bin/{go,godoc,gofmt} /usr/bin/ # Do symlinks
+sudo ln -sv /usr/local/go/bin/{go,godoc,gofmt} /usr/bin/ # Do symlinks
 
 gorootExists=$(grep -Fc "GOROOT=" /home/$USER/$rcFile) # Get the number of instances of GOROOT
 
@@ -40,4 +42,5 @@ if [ $gorootExists -eq 0 ]; then # If there are no instances
     echo "2) Opening a new terminal tab."
 fi
 
-echo "Go installation finished. Have an issue? File at https://github.com/michaelrutherford/solus-scripts"
+echo "===== Go installation finished. ====="
+echo "Have an issue? File at https://github.com/michaelrutherford/solus-scripts"
