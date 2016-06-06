@@ -1,9 +1,9 @@
 #!/bin/bash
 
 shellDir=$(pwd)
-vscodeUrl="https://go.microsoft.com/fwlink/?LinkID=620884"
+vscodeUrl="https://az764295.vo.msecnd.net/stable/809e7b30e928e0c430141b3e6abf1f63aaf55589/code-stable-vscode-amd64.deb.tar.xz"
 vscodeDirRoot="/opt/vscode-official"
-tarballName="vscode.zip"
+tarballName="code-stable-vscode-amd64.deb.tar.xz"
 
 echo "Did you know, we already offer the open source community version of Visual Studio Code?"
 echo "Do you want to install that instead? (y/N)"
@@ -22,14 +22,14 @@ else
 	cd $vscodeDirRoot # Go to VSCode directory
 
 	echo "Unpackaging..."
-	sudo unzip -qq /home/$USER/Downloads/$tarballName
+	sudo tar -xf /home/$USER/Downloads/$tarballName
 	sudo mv $vscodeDirRoot/VSCode-linux-x64/* $vscodeDirRoot/
 	sudo rmdir $vscodeDirRoot/VSCode-linux-x64
 
 	echo "Time travelling to the future."
 	sudo install -Dm644 $shellDir/extras/vscode.desktop /usr/share/applications/vscode.desktop
 	sudo cp $vscodeDirRoot/resources/app/resources/linux/code.png /usr/share/pixmaps/code.png
-	sudo ln -s $vscodeDirRoot/code /usr/bin/code
+	sudo ln -fs $vscodeDirRoot/code /usr/bin/code
 	
 	rm /home/$USER/Downloads/$tarballName
 	echo "We're here!"
